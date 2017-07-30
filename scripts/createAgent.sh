@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ../src/main/java
+cd ../src/main/java/agent
 
 # add full path in quotes to agent.jar in run-configuration:
 # -javaagent:"fullPath/agent.jar"
