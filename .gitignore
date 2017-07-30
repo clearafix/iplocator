@@ -62,3 +62,5 @@ fabric.properties
 *.jar
 GeoLite2-City-Blocks-IPv4.csv
 GeoLite2-City-Locations-en.csv
+project/target/
+target/
