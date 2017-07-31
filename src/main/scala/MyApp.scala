@@ -12,11 +12,9 @@ object MyApp extends App with Timing {
        |1.0.32.0/19,1809858,1814991,,0,0,,23.1167,113.2500,50""".stripMargin
 
 
-  val ipsCodes = io.Source.
-    fromFile("src/main/resources/GeoLite2-City-Blocks-IPv4.csv")
+  val ipsCodes = io.Source.fromFile("src/main/resources/GeoLite2-City-Blocks-IPv4.csv")
 
-  val cityCodes = io.Source.
-    fromFile("src/main/resources/GeoLite2-City-Locations-en.csv")
+  val cityCodes = io.Source.fromFile("src/main/resources/GeoLite2-City-Locations-en.csv")
 
   val ipsToGeoCodesTable = scala.collection.mutable.HashMap.empty[String, List[String]]
   val geCodesToCityTable = scala.collection.mutable.HashMap.empty[String, List[String]]
@@ -27,7 +25,8 @@ object MyApp extends App with Timing {
     (subnet, IpUtils.subnetToRangeLongs(subnet))
   }
 
-  val sorted = res.toList sortBy (_._2._1) map (r => s"${r._1}!${r._2._1}-${r._2._2}") filter(x => !x.matches(".*/.*![0-9]+-[0-9]+")) foreach(println)
+  val sorted = res.toList sortBy (_._2._1) map (r => s"${r._1}!${r._2._1}-${r._2._2}") filter(x => x.matches(".*/.*![0-9]+-[0-9]+"))
+  println(sorted.size)
 
 //  millis {
 //    for (line <- ipsCodes.getLines()) {
