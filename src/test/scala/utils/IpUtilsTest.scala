@@ -30,6 +30,7 @@ class IpUtilsTest extends WordSpec with Matchers  with Timing{
       asString(millis{getBroadcast("1.0.0.0", "12")}) should equal ("1.15.255.255")
       asString(millis{getBroadcast("1.0.0.0","8")}) should equal ("1.255.255.255")
       asString(millis{getBroadcast("1.0.0.0", "31")}) should equal ("1.0.0.1")
+      asString(millis{getBroadcast("56.128.0.0", "9")}) should equal ("56.255.255.255")
     }
   }
 }

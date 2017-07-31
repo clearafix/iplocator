@@ -41,4 +41,9 @@ object IpUtils {
     val zeros = new String(Array.fill(left)('0'))
     new String(zeros) + string
   }
+
+  def getAllocatedIPsCount(prefixBits: String): Long ={
+    val bitsForHosts = 32 - prefixBits.toByte
+    if (bitsForHosts == 0) 0 else 1 << bitsForHosts
+  }
 }
