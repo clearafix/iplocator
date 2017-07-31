@@ -1,4 +1,4 @@
-import utils.Timing
+import utils._
 
 object MyApp extends App with Timing {
 
@@ -21,12 +21,32 @@ object MyApp extends App with Timing {
   val ipsToGeoCodesTable = scala.collection.mutable.HashMap.empty[String, List[String]]
   val geCodesToCityTable = scala.collection.mutable.HashMap.empty[String, List[String]]
 
-  millis {
-    for (line <- ipsCodes.getLines()) {
-      if (line.contains("/1") || line.contains("/2") || line.contains("/3")) {
-      } else {
-        println(line)
-      }
-    }
+
+  val res = for (line <- ipsCodes.getLines() if line.contains("/")) yield {
+    val subnet = line.split(",")(0)
+    (subnet, IpUtils.subnetToRangeLongs(subnet))
   }
+
+  val sorted = res.toList sortBy (_._2._1) map (r => s"${r._1}!${r._2._1}-${r._2._2}") filter(x => !x.matches(".*/.*![0-9]+-[0-9]+")) foreach(println)
+
+//  millis {
+//    for (line <- ipsCodes.getLines()) {
+//      if (line.matches(".*/[0-9].*")) {
+//      } else {
+//        println(line)
+//      }
+//    }
+//  }
+
+////faster version
+//  millis {
+//    for (line <- ipsCodes.getLines()) {
+//      if (line.contains("/")) {
+//      } else {
+//        println(line)
+//      }
+//    }
+//  }
+
+
 }
